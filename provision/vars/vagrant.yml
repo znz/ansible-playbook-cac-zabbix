@@ -1,0 +1,26 @@
+---
+journald_users:
+- 'vagrant'
+
+sshd_allow_users:
+- 'vagrant'
+
+sshd_allow_tcp_wrappers:
+- '127.0.0.1 [::1]'
+- '10.'
+- '192.168.0.0/16'
+- '[fd00:abcd:abcd:abcd::]/64'
+- '.jp'
+
+byobu_users:
+- 'vagrant'
+
+nadoka_irc_host: ''
+#nadoka_irc_port: 6697
+nadoka_irc_pass: "nil"
+nadoka_irc_ssl_params: '{}'
+nadoka_channel_info: "'#private' => { key: 'channelkey' }"
+
+stage_etc_hosts:
+- regexp: '^10\.0\.2\.15 '
+  line: '10.0.2.15 zbx'

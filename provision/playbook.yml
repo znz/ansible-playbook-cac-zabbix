@@ -1,0 +1,42 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+  - vars/{{ stage }}.yml
+  pre_tasks:
+  - name: "Install etckeeper"
+    apt: name=etckeeper
+  roles:
+  - role: znz.ufw
+    ufw_default_forward_policy: reject
+    ufw_allow_in_tcp:
+    - comment: "HTTP"
+      port: 80
+    - comment: "HTTPS"
+      port: 443
+    ufw_allow_out_tcp:
+    - comment: "HTTP"
+      port: 80
+    - comment: "SSH"
+      port: 22
+    #- comment: "SMTPS"
+    #  port: 465
+  - role: znz.journald
+  - role: znz.sshd
+  - role: znz.unattended-upgrades
+  - role: znz.nadoka
+    when: nadoka is not none and nadoka != []
+  tasks:
+  - name: 'Update /etc/hosts'
+    lineinfile:
+      path: /etc/hosts
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items: "{{ stage_etc_hosts }}"
+  - name: 'Comment out 127.0.1.1 in /etc/hosts'
+    replace:
+      path: /etc/hosts
+      regexp: '^(127\.0\.1\.1)'
+      replace: '#\1'
+  - name: 'Install logwatch'
+    apt: name=logwatch
