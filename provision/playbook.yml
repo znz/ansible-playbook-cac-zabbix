@@ -26,6 +26,7 @@
   - role: znz.unattended-upgrades
   - role: znz.nadoka
     when: nadoka is not none and nadoka != []
+  - role: znz.openvpn-client
   tasks:
   - name: 'Update /etc/hosts'
     lineinfile:
