@@ -26,3 +26,7 @@ stage_etc_hosts:
   line: '10.0.2.15 zbx'
 
 openvpn_client: []
+
+zabbix_server_conf: |
+  StartPingers=3
+  Timeout=5

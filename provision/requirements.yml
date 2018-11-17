@@ -13,3 +13,4 @@
 - src: https://github.com/znz/ansible-role-openvpn-client
   version: master
   name: znz.openvpn-client
+- src: znzj.zabbix

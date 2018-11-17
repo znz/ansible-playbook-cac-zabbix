@@ -27,6 +27,7 @@
   - role: znz.nadoka
     when: nadoka is not none and nadoka != []
   - role: znz.openvpn-client
+  - role: znzj.zabbix
   tasks:
   - name: 'Update /etc/hosts'
     lineinfile:
